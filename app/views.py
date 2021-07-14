@@ -73,8 +73,8 @@ def classicalguitar(request,data=None):
         guitar = Product.objects.filter(category='CG').filter(discounted_price__gt = 10000)
     return render(request, 'app/classicalguitar.html',{'guitar':guitar})
 
-def login(request):
- return render(request, 'app/login.html')
+#def login(request):
+# return render(request, 'app/login.html')
 
 #def customerregistration(request):
  #return render(request, 'app/customerregistration.html')
@@ -96,3 +96,6 @@ class CustomerRegistrationView(View):
 
 def checkout(request):
  return render(request, 'app/checkout.html')
+
+def forgot_password(request):
+    return render(request,'app/home.html')

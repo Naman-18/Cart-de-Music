@@ -1,7 +1,13 @@
+from app.forms import LoginForm
+from django.contrib import auth
 from django.urls import path
 from app import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from .forms import LoginForm
+
+
 urlpatterns = [
     #path('', views.home),
     path('',views.ProductView.as_view(),name="home"),
@@ -18,7 +24,10 @@ urlpatterns = [
     path('electricguitar/<slug:data>', views.electricguitar, name='electricguitardata'),
     path('classicalguitar/', views.classicalguitar, name='classicalguitar'),
     path('classicalguitar/<slug:data>', views.classicalguitar, name='classicalguitardata'),
-    path('login/', views.login, name='login'),
+   # path('login/', views.login, name='login'),
+    path('accounts/login/',auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm),name='login'),
+    path('passwordrest',views.forgot_password,name='passwordreset'),
+    path('logout/', auth_views.LogoutView.as_view(next_page = 'login'), name='logout'),
     #path('registration/', views.customerregistration, name='customerregistration'),
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
