@@ -38,8 +38,38 @@ def orders(request):
 def change_password(request):
  return render(request, 'app/changepassword.html')
 
-def mobile(request):
- return render(request, 'app/mobile.html')
+def acousticguitar(request,data=None):
+    if data == None:
+        guitar = Product.objects.filter(category='AG')
+    elif data == 'Fender' or data == 'Cort' or data == 'Yamaha':
+        guitar = Product.objects.filter(category='AG').filter(brand=data)
+    elif data == 'below':
+        guitar = Product.objects.filter(category='AG').filter(discounted_price__lt = 10000)
+    elif data == 'above':
+        guitar = Product.objects.filter(category='AG').filter(discounted_price__gt = 10000)
+    return render(request, 'app/acousticguitar.html',{'guitar':guitar})
+
+def electricguitar(request,data=None):
+    if data == None:
+        guitar = Product.objects.filter(category='EG')
+    elif data == 'Fender' or data == 'Cort' or data == 'Ibanez' or data=='ESP':
+        guitar = Product.objects.filter(category='EG').filter(brand=data)
+    elif data == 'below':
+        guitar = Product.objects.filter(category='EG').filter(discounted_price__lt = 10000)
+    elif data == 'above':
+        guitar = Product.objects.filter(category='EG').filter(discounted_price__gt = 10000)
+    return render(request, 'app/electricguitar.html',{'guitar':guitar})
+
+def classicalguitar(request,data=None):
+    if data == None:
+        guitar = Product.objects.filter(category='CG')
+    elif data == 'Fender' or data == 'Cort' or data == 'Ibanez' or data =='Yamaha' or data=='Epiphone' or data=='Valencia':
+        guitar = Product.objects.filter(category='CG').filter(brand=data)
+    elif data == 'below':
+        guitar = Product.objects.filter(category='CG').filter(discounted_price__lt = 10000)
+    elif data == 'above':
+        guitar = Product.objects.filter(category='CG').filter(discounted_price__gt = 10000)
+    return render(request, 'app/classicalguitar.html',{'guitar':guitar})
 
 def login(request):
  return render(request, 'app/login.html')
