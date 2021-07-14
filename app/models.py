@@ -55,10 +55,10 @@ class Customer(models.Model):
         return str(self.id)
 
 CATEGORY_CHOICES ={
-    ('M','Mobile'),
-    ('L','Laptop'),
-    ('TW','Top Wear'),
-    ('BW','Bottom Wear')
+    ('AG','Acoustic Guitar'),
+    ('EG','Electric Guitar'),
+    ('CG','Classical Guitar'),
+    ('M','Musical')
 }
 
 class Product(models.Model):
