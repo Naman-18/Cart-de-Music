@@ -1,7 +1,15 @@
 from django.shortcuts import render
+from django.views import View
+from .models import Customer, Product, Cart, OrderPlaced
 
-def home(request):
- return render(request, 'app/home.html')
+class ProductView(View):
+    def get(self,request):
+        acoustic = Product.objects.filter(category = 'AG')
+        electric = Product.objects.filter(category = 'EG')
+        classical = Product.objects.filter(category = 'CG')
+        return render(request, 'app/home.html',
+        {'acoustic':acoustic, 'electric' : electric, 'classical': classical})
+        
 
 def product_detail(request):
  return render(request, 'app/productdetail.html')

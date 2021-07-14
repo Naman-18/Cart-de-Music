@@ -31,7 +31,7 @@
 <!-- End Banner Slider -->
 {% endblock banner_slider %}
 
-{% block livesale %}
+{% comment %} {% block livesale %}
 <!-- Live Sale Section -->
 <div class="container">
   <div class="row bg-danger text-center p-5 text-white border-bottom shadow">
@@ -41,32 +41,25 @@
   </div>
 </div> 
 <!-- End Live Sale Section -->
-{% endblock livesale %}
+{% endblock livesale %} {% endcomment %}
 
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
- <h2>ShoppingX Deals of The Day</h2>
+ 
+ <h2>Acoustic Guitars</h2>
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
-  <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{% static 'app/images/product/1.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 1</span><br><span class="fs-5">Rs. 500</span></div></a>
-  <div class="item"><img src="{% static 'app/images/product/2.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 2</span><br><span class="fs-5">Rs. 300</span></div>
-  <div class="item"><img src="{% static 'app/images/product/3.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 3</span><br><span class="fs-5">Rs. 100</span></div>
-  <div class="item"><img src="{% static 'app/images/product/4.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 4</span><br><span class="fs-5">Rs. 700</span></div>
-  <div class="item"><img src="{% static 'app/images/product/5.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 5</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/6.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 6</span><br><span class="fs-5">Rs. 400</span></div>
-  <div class="item"><img src="{% static 'app/images/product/7.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 7</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/8.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 8</span><br><span class="fs-5">Rs. 300</span></div>
-  <div class="item"><img src="{% static 'app/images/product/9.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 9</span><br><span class="fs-5">Rs. 600</span></div>
-  <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 10</span><br><span class="fs-5">Rs. 900</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 11</span><br><span class="fs-5">Rs. 100</span></div>
-  <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 12</span><br><span class="fs-5">Rs. 200</span></div>
+{% for guitar in acoustic  %}
+  <a href="{% url 'product-detail' %}" class="btn">
+  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">{{guitar.discounted_price}}</span></div></a>
+  {% endfor %}
  </div>
 </div>
 <!-- End 1st Product Slider -->
 
 <!-- Payment Info Section -->
-<div class="container my-5">
+{% comment %} <div class="container my-5">
  <div class="row">
   <div class="col-sm-3">
    <div class="card mb-3">
@@ -97,28 +90,36 @@
    </div>
   </div>
  </div>
-</div>
+</div> {% endcomment %}
 <!-- End Payment Info Section -->
 
 <!-- 2nd Product Slider -->
 <div class="mx-3">
- <h2>Trending Deals</h2>
+ <h2>Electric Guitars</h2>
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
-  <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 1</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 2</span><br><span class="fs-5">Rs. 300</span></div>
-  <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 3</span><br><span class="fs-5">Rs. 100</span></div>
-  <div class="item"><img src="{% static 'app/images/product/9.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 4</span><br><span class="fs-5">Rs. 700</span></div>
-  <div class="item"><img src="{% static 'app/images/product/8.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 5</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 6</span><br><span class="fs-5">Rs. 400</span></div>
-  <div class="item"><img src="{% static 'app/images/product/5.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 7</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 8</span><br><span class="fs-5">Rs. 300</span></div>
-  <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 9</span><br><span class="fs-5">Rs. 600</span></div>
-  <div class="item"><img src="{% static 'app/images/product/7.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 10</span><br><span class="fs-5">Rs. 900</span></div>
-  <div class="item"><img src="{% static 'app/images/product/6.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 11</span><br><span class="fs-5">Rs. 100</span></div>
-  <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 12</span><br><span class="fs-5">Rs. 200</span></div>
+  {% for guitar in electric  %}
+  <a href="{% url 'product-detail' %}" class="btn">
+  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">{{guitar.discounted_price}}</span></div></a>
+  {% endfor %}
+  
  </div>
 </div>
 <!-- End 2nd Product Slider -->
+
+<!-- 3rd Product Slider -->
+<div class="mx-3">
+ <h2>Classical Guitars</h2>
+ <!-- Slider 3 -->
+ <div class="owl-carousel" id="slider2">
+  {% for guitar in classical  %}
+  <a href="{% url 'product-detail' %}" class="btn">
+  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">{{guitar.discounted_price}}</span></div></a>
+  {% endfor %}
+  
+ </div>
+</div>
+<!-- End 3rd Product Slider -->
+
 {% endblock main-content %}
 
