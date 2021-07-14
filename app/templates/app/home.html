@@ -51,8 +51,8 @@
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
 {% for guitar in acoustic  %}
-  <a href="{% url 'product-detail' %}" class="btn">
-  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">{{guitar.discounted_price}}</span></div></a>
+  <a href="{% url 'product-detail' guitar.id %}" class="btn">
+  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">Rs.{{guitar.discounted_price}}</span></div></a>
   {% endfor %}
  </div>
 </div>
@@ -99,8 +99,8 @@
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for guitar in electric  %}
-  <a href="{% url 'product-detail' %}" class="btn">
-  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">{{guitar.discounted_price}}</span></div></a>
+  <a href="{% url 'product-detail' guitar.id %}" class="btn">
+  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">Rs. {{guitar.discounted_price}}</span></div></a>
   {% endfor %}
   
  </div>
@@ -111,10 +111,10 @@
 <div class="mx-3">
  <h2>Classical Guitars</h2>
  <!-- Slider 3 -->
- <div class="owl-carousel" id="slider2">
+ <div class="owl-carousel" id="slider3">
   {% for guitar in classical  %}
-  <a href="{% url 'product-detail' %}" class="btn">
-  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">{{guitar.discounted_price}}</span></div></a>
+  <a href="{% url 'product-detail' guitar.id %}" class="btn">
+  <div class="item"><img src="{{guitar.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{guitar.title}}</span><br><span class="fs-5">Rs. {{guitar.discounted_price}}</span></div></a>
   {% endfor %}
   
  </div>
