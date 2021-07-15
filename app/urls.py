@@ -5,7 +5,7 @@ from app import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from .forms import LoginForm
+from .forms import LoginForm, MyPasswordChangeForm
 
 
 urlpatterns = [
@@ -17,7 +17,9 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
-    path('changepassword/', views.change_password, name='changepassword'),
+   #path('changepassword/', views.change_password, name='changepassword'),
+    path('changepassword/',auth_views.PasswordChangeView.as_view(template_name='app/changepassword.html',form_class = MyPasswordChangeForm, success_url='/passwordchangedone/'),name='changepassword'),
+    path('passwordchangedone/',auth_views.PasswordChangeView.as_view(template_name='app/passwordchangedone.html'),name='passwordchangedone'),
     path('acousticguitar/', views.acousticguitar, name='acousticguitar'),
     path('acousticguitar/<slug:data>', views.acousticguitar, name='acousticguitardata'),
     path('electricguitar/', views.electricguitar, name='electricguitar'),
