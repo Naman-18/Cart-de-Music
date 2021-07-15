@@ -96,6 +96,3 @@ class CustomerRegistrationView(View):
 
 def checkout(request):
  return render(request, 'app/checkout.html')
-
-def forgot_password(request):
-    return render(request,'app/home.html')
