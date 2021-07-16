@@ -56,8 +56,9 @@
                {{request.user.username|capfirst}}
               </a>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                
+                <li><a class="dropdown-item" href="{% url 'orders' %}">My Orders</a></li>
+                <li><a class="dropdown-item" href="{% url 'profile' %}">My Address</a></li>
                 <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
               </ul>
@@ -84,7 +85,7 @@
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
         <small class="text-white">Copyright &copy; 2021  </small>
-        <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
+        {% comment %} <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px"> {% endcomment %}
     </footer> <!-- End Footer -->
 
     <!-- Jquery -->

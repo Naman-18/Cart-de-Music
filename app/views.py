@@ -40,14 +40,23 @@ class ProductDetailView(View):
 
 @login_required
 def add_to_cart(request):
- totalitem=0
+
  user = request.user
  product_id = request.GET.get('prod_id')
  product = Product.objects.get(id=product_id)
  Cart(user=user,product=product).save()
- if request.user.is_authenticated:
-             totalitem= len(Cart.objects.filter(user=request.user))
+
  return redirect('/cart')
+
+@login_required
+def buynow(request):
+    user = request.user
+    product_id = request.GET.get('prod_id')
+    product = Product.objects.get(id=product_id)
+    quantity=1
+    Cart(user=user,product=product,quantity=quantity).save()
+    return redirect('/checkout')
+
  
 @login_required
 def show_cart(request):
@@ -123,8 +132,8 @@ def remove_cart(request):
         data ={'amount':amount,'totalamount':total_amount}
         return JsonResponse(data)
 
-def buy_now(request):
- return render(request, 'app/buynow.html')
+#def buy_now(request):
+ #return render(request, 'app/buynow.html')
 
 #def profile(request):
  #return render(request, 'app/profile.html')
@@ -153,6 +162,13 @@ class ProfileView(View):
 def address(request):
  add = Customer.objects.filter(user=request.user)
  return render(request, 'app/address.html', {'add':add, 'active':'btn-secondary'})
+
+def deleteaddress(request):
+    custid = request.GET.get('addid')
+    c =Customer.objects.get(Q(id=custid) & Q(user=request.user))
+    c.delete()
+    return redirect ('/address')
+
 
 @login_required
 def orders(request):
@@ -218,20 +234,29 @@ class CustomerRegistrationView(View):
 
 @login_required
 def checkout(request):
+    totalitem=0
     user =request.user
     add =Customer.objects.filter(user = user)
     cart_items = Cart.objects.filter(user=user)
     amount= 0.0
     shipping_amount = 70.0
     total_amount = 0.0
+    if request.user.is_authenticated:
+            totalitem= len(Cart.objects.filter(user=request.user))
     cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+    for p in cart_product:
+        if p.quantity<1:
+            p.delete()
+
     if cart_product:
         for p in cart_product:
             tempamount = (p.quantity * p.product.discounted_price)
             amount+=tempamount
         total_amount = amount+shipping_amount
-
-    return render(request, 'app/checkout.html',{'add':add, 'totalamount':total_amount, 'cart_items':cart_items})
+        return render(request, 'app/checkout.html',{'add':add, 'totalamount':total_amount, 'cart_items':cart_items,'totalitem':totalitem})
+    
+    else:
+        return render(request,'app/emptycart.html')
 
 @login_required
 def payment_done(request):
@@ -239,7 +264,10 @@ def payment_done(request):
     custid = request.GET.get('custid')
     customer = Customer.objects.get(id=custid)
     cart  =Cart.objects.filter(user = user)
-    for c in cart:
-        OrderPlaced(user=user, customer=customer,product=c.product, quantity=c.quantity).save()
-        c.delete()
-    return redirect("orders")
+    if cart:
+        for c in cart:
+            OrderPlaced(user=user, customer=customer,product=c.product, quantity=c.quantity).save()
+            c.delete()
+        return redirect("orders")
+    else:
+        return render(request,'app/emptycart.html')

@@ -19,8 +19,8 @@
      <div class = "form-group mb-3">
      {{fm.label_tag}} {{fm}} <small class ="text-danger"> {{fm.errors|striptags}}</small> </div>
      {%endfor%}
-     <input type="submit" value="Submit" class="btn btn-primary"> <br>
-    <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}"
+     <input type="submit" value="Submit" class="btn btn-secondary"> <br>
+    <div class="text-center text-secondary fw-bold"><small>Existing User ? <a href="{% url 'login' %}"
        class="text-danger">Login Now</a> </small></div>
     {% if form.non_field_errors %}
     {% for error in form.non_field_errors %}

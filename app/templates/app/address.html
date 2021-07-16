@@ -7,25 +7,31 @@
  <h3>Welcome {{request.user.username|capfirst}}</h3>
   <div class="col-sm-2 border-end">
    <ul class="list-unstyled">
-    <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
-    <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address</a></li>
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Add Address</a></li>
+    <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Saved Address</a></li>
    </ul>
   </div>
   <div class="col-sm-9 offset-sm-1">
    <div class="row">
    {% for ad in add%}
     <div class="col-sm-6">
-     <div class="card">
+     <div class="card bg-light border-secondary">
       <div class="card-body">
-       <h3>Address {{forloop.counter}}</h3>
-       <p>Name: {{ad.name}}</p>
-       <p>Locality: {{ad.locality}} </p>
-       <p>City: {{ad.city}} </p>
-       <p>State: {{ad.state}}</p>
-       <p>Zipcode: {{ad.zipcode}}</p>
+       <h3> Address {{forloop.counter}}</h3>
+       <p><strong>Name:</strong> {{ad.name|capfirst}}</p>
+       <p> <strong> Locality: </strong> {{ad.locality|capfirst}} </p>
+       <p><strong> City: </strong> {{ad.city|capfirst}} </p>
+       <p><strong> State:</strong> {{ad.state}}</p>
+       <p><strong> Zipcode: </strong> {{ad.zipcode}}</p>
       </div>
+      <div class="card-footer">
+       <form action="/deleteaddress" class="d-inline">
+   <input type = "hidden" name="addid" value={{ad.id}} id="addid">
+   <button text="center" type="submit" class="btn btn-danger shadow px-5 py-2">
+  Delete Address </button>  </div>
      </div>
     </div>
+   
  {%endfor%}
    </div>
   </div>

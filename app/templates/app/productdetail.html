@@ -33,8 +33,13 @@
  </form>
  {%endif%}
 
+  <form action="/buynow" class="d-inline">
+   <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
+   <button type="submit" class="btn btn-danger shadow px-5 py-2">
+  Buy Now </button>   
+ </form>
     
-   <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+   {% comment %} <a href="{% url 'buynow' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a> {% endcomment %}
    <h5 class="mt-5">Available Offers</h5>
    <ul>
     <li>Special Price Get extra ₹3000 off (price inclusive of discount)</li>

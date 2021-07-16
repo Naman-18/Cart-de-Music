@@ -8,10 +8,10 @@
     <h4>Order Summary</h4>
     <hr>
     {% for item in cart_items%}
-      <div class="card mb-2">
+      <div class="card bg-light border-light mb-2">
         <div class="card-body">
           <h5>Product: {{item.product.title}}</h5>
-          <div class="col-sm-3 text-center align-self-center"><img src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
+          <div class="col-sm-3 text-center align-center"><img src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
           <p>Quantity: {{item.quantity}}</p>
           <p class="fw-bold">Price: {{item.total_cost}}</p>
         </div>
@@ -24,15 +24,16 @@
     <h4>Select Shipping Address</h4>
     <hr>
     <form action="/paymentdone">
+    {% if add%}
     {% for ad in add%}
-      <div class="card">
+      <div class="card bg-light border-secondary">
         <div class="card-body">
-        <h5>{{ad.name}}</h5>
+        <h5>{{ad.name|capfirst}}</h5>
         <p>{{ad.locality}},{{ad.city}},{{ad.state}}-{{ad.zipcode}}</p>
         </div>
       </div>
         <div class="form-check mt-2 mb-5">
-          <input class="form-check-input" type="radio" name="custid" id="custid{{forloop.counter}}" value="{{ad.id}}">
+          <input class="form-check-input" type="radio" name="custid" id="custid{{forloop.counter}}" value="{{ad.id}}" required>
           <label class="form-check-label fw-bold" for="">
             Address: {{forloop.counter}} </label>
         </div>
@@ -41,6 +42,9 @@
           <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
         </div>
       </form>
+    {% else %}
+         <a href="{% url 'profile' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Add Address</a>  
+    {%endif%}
     </div>
   </div>
 </div>
