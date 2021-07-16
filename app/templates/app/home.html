@@ -31,23 +31,12 @@
 <!-- End Banner Slider -->
 {% endblock banner_slider %}
 
-{% comment %} {% block livesale %}
-<!-- Live Sale Section -->
-<div class="container">
-  <div class="row bg-danger text-center p-5 text-white border-bottom shadow">
-    <h1>SALE IS LIVE NOW</h1>
-    <span>5% Instant Discount on Axis Bank Credit and Debit Card</span>
-    <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
-  </div>
-</div> 
-<!-- End Live Sale Section -->
-{% endblock livesale %} {% endcomment %}
 
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
  
- <h2>Acoustic Guitars</h2>
+ <h2><strong>Acoustic Guitars</strong></h2>
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
 {% for guitar in acoustic  %}
@@ -57,45 +46,12 @@
  </div>
 </div>
 <!-- End 1st Product Slider -->
+<hr>
 
-<!-- Payment Info Section -->
-{% comment %} <div class="container my-5">
- <div class="row">
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-     <img src="{% static 'app/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-      <img src="{% static 'app/images/payavail/upi.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-      <img src="{% static 'app/images/payavail/nb.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-      <img src="{% static 'app/images/payavail/bj.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
- </div>
-</div> {% endcomment %}
-<!-- End Payment Info Section -->
 
 <!-- 2nd Product Slider -->
 <div class="mx-3">
- <h2>Electric Guitars</h2>
+ <h2><strong>Electric Guitars</strong></h2>
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for guitar in electric  %}
@@ -106,10 +62,10 @@
  </div>
 </div>
 <!-- End 2nd Product Slider -->
-
+<hr>
 <!-- 3rd Product Slider -->
 <div class="mx-3">
- <h2>Classical Guitars</h2>
+ <h2><strong>Classical Guitars</strong></h2>
  <!-- Slider 3 -->
  <div class="owl-carousel" id="slider3">
   {% for guitar in classical  %}

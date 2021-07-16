@@ -133,7 +133,7 @@ def buy_now(request):
 class ProfileView(View):
     def get(self,request):
         form = CustomerProfileForm()
-        return render(request,'app/profile.html',{'form':form, 'active':'btn-primary'})
+        return render(request,'app/profile.html',{'form':form, 'active':'btn-secondary'})
     
     def post(self,request):
         form =CustomerProfileForm(request.POST)
@@ -147,12 +147,12 @@ class ProfileView(View):
             reg = Customer(user=user,name=name,locality=locality,city=city,state=state,zipcode=zipcode)
             reg.save()
             messages.success(request, 'Address Added Successfully')
-        return render(request,'app/profile.html',{'form':form, 'acitve':'btn=primary'})
+        return render(request,'app/profile.html',{'form':form, 'acitve':'btn-secondary'})
 
 @login_required
 def address(request):
  add = Customer.objects.filter(user=request.user)
- return render(request, 'app/address.html', {'add':add, 'active':'btn-primary'})
+ return render(request, 'app/address.html', {'add':add, 'active':'btn-secondary'})
 
 @login_required
 def orders(request):

@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
 
 
-    <title>ShoppingX | {% block title %} {% endblock title %} </title>
+    <title>Cart de Music | {% block title %} {% endblock title %} </title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <div class="container">
-       <a class="navbar-brand" href="/">ShoppingX</a>
+       <a class="navbar-brand" href="/"><strong> Cart de Music </strong> </a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -37,7 +37,7 @@
              <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                Guitars
              </a>
-             <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="electronicsDropdown">
                <li><a class="dropdown-item" href="{% url 'acousticguitar' %}">Acoustic</a></li>
                <li><a class="dropdown-item" href="{% url 'electricguitar' %}">Electric</a></li>
                <li><a class="dropdown-item" href="{% url 'classicalguitar' %}">Classical</a></li>
@@ -55,7 +55,7 @@
               <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                {{request.user.username|capfirst}}
               </a>
-              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                 <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
@@ -79,12 +79,11 @@
      </div>
     </nav>
     {% block banner_slider %} {% endblock banner_slider %}
-    {% block livesale %} {% endblock livesale %}
     {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <small class="text-white">Copyright &copy; 2021 || Designed By GeekyShows || </small>
+        <small class="text-white">Copyright &copy; 2021  </small>
         <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
 
