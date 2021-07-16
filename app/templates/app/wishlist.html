@@ -1,0 +1,56 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Wishlist{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome {{request.user.username|capfirst}}</h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'wishlist' %}" class="btn btn-secondary">Saved Product</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+  {% for wishlist in wish%}
+   <div class="row bg-light shadow-sm mb-3">
+   <div class = "col-sm-2">
+   <a href="{% url 'product-detail' wishlist.product.id %}" class="btn">
+   <img src = "{{wishlist.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
+   </div>
+    <div class="col-sm-7">
+    <p><strong> Product:</strong> {{wishlist.product.title}} </p>
+    <p> <strong> Brand: </strong> {{wishlist.product.brand}} </p>
+    
+    <form action="/add-to-cart" class="d-inline">
+   <input type = "hidden" name="prod_id" value={{wishlist.product.id}} id="prod_id">
+   <button type="submit" class="btn btn-primary shadow px-5 py-2">
+ Add to Cart </button>   
+ </form>
+
+    <form action="/deletewishlist" class="d-inline">
+   <input type = "hidden" name="wishlistid" value={{wishlist.id}} id="wishlistid">
+   <button text="center" type="submit" class="btn btn-danger shadow px-5 py-2">
+  Delete From Wishlist </button> 
+    </div>
+    {% comment %} <div class="col-sm-6">
+     <div class="card bg-light border-secondary">
+      <div class="card-body">
+       <div class="col-sm-3 text-center align-self-center"><img src="{{wishlist.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
+       <p>{{wishlist.product.title}}</p>
+       <p> {{wishlist.product.brand}} </p>
+       <p>{{wishlist.date}}</p>
+      </div>
+      <div class="card-footer">
+       <form action="/deleteaddress" class="d-inline">
+   <input type = "hidden" name="addid" value={{ad.id}} id="addid">
+   <button text="center" type="submit" class="btn btn-danger shadow px-5 py-2">
+  Delete From Wishlist </button>  </div>
+     </div> {% endcomment %}
+    </div>
+   
+ {%endfor%}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

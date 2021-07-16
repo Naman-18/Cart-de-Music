@@ -22,6 +22,16 @@
    <button type="submit" class="btn btn-primary shadow px-5 py-2">
  Add to Cart </button>   
  </form>
+  <form action="/add_to_wishlist" class="d-inline">
+   <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
+   <button type="submit" class="btn btn-danger shadow px-5 py-2">
+  Wishlist </button>   
+ </form>
+ <form action="/buynow" class="d-inline">
+   <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
+   <button type="submit" class="btn btn-success shadow px-5 py-2">
+  Buy Now </button>   
+ </form>
  {%endif%}
  {%endif%}
 
@@ -29,15 +39,23 @@
  <form action="/add-to-cart" class="d-inline">
    <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
    <button type="submit" class="btn btn-primary shadow px-5 py-2">
- Add to Cart </button>   
- </form>
- {%endif%}
-
-  <form action="/buynow" class="d-inline">
+ Add to Cart </button>  
+ </form> 
+  <form action="/add_to_wishlist" class="d-inline">
    <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
    <button type="submit" class="btn btn-danger shadow px-5 py-2">
+  Wishlist </button>   
+ </form>
+ <form action="/buynow" class="d-inline">
+   <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
+   <button type="submit" class="btn btn-success shadow px-5 py-2">
   Buy Now </button>   
  </form>
+ {%endif%}
+  
+ 
+
+  
     
    {% comment %} <a href="{% url 'buynow' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a> {% endcomment %}
    <h5 class="mt-5">Available Offers</h5>

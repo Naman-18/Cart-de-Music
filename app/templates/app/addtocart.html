@@ -12,7 +12,10 @@
     {% for cart in carts %}
     <hr>
     <div class="row">
-     <div class="col-sm-3 text-center align-self-center"><img src="{{cart.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
+    <div class = "col-sm-2">
+     <a href="{% url 'product-detail' cart.product.id %}" class="btn">
+   <img src = "{{cart.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
+   </div>
      <div class="col-sm-9">
       <div>
        <h5>{{cart.product.title}}</h5>

@@ -14,7 +14,8 @@
   {% for op in orders%}
   <div class="row bg-light shadow-sm mb-3">
    <div class = "col-sm-2">
-   <img src = "{{op.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150">
+   <a href="{% url 'product-detail' op.product.id %}" class="btn">
+   <img src = "{{op.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
    </div>
     <div class="col-sm-7">
     <p><strong> Product:</strong> {{op.product.title}} </p>

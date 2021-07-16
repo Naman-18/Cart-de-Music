@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
-from .models import Customer, Product, Cart, OrderPlaced
+from .models import Customer, Product, Cart, OrderPlaced, Wishlist
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
@@ -47,6 +47,31 @@ def add_to_cart(request):
  Cart(user=user,product=product).save()
 
  return redirect('/cart')
+
+@login_required
+def add_to_wishlist(request):
+    user= request.user
+    product_id = request.GET.get('prod_id')
+    product  =Product.objects.get(id=product_id)
+    Wishlist(user=user,product=product).save()
+    return redirect('/wishlist')
+
+def show_wishlist(request):
+    if request.user.is_authenticated:
+        totalitem=0
+        user =request.user
+        wish = Wishlist.objects.filter(user=user)
+        if request.user.is_authenticated:
+             totalitem= len(Cart.objects.filter(user=request.user))
+     
+        return render(request,'app/wishlist.html',{'wish':wish,'totalitem':totalitem})
+
+def deletewishlist(request):
+    wishid = request.GET.get('wishlistid')
+    c =Wishlist.objects.get(Q(id=wishid) & Q(user=request.user))
+    c.delete()
+    return redirect ('/wishlist')       
+
 
 @login_required
 def buynow(request):
