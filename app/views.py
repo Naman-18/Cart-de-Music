@@ -131,10 +131,11 @@ def address(request):
  return render(request, 'app/address.html', {'add':add, 'active':'btn-primary'})
 
 def orders(request):
- return render(request, 'app/orders.html')
+    orders = OrderPlaced.objects.filter(user=request.user)
+    return render(request, 'app/orders.html',{'orders':orders})
 
 def change_password(request):
- return render(request, 'app/changepassword.html')
+    return render(request, 'app/changepassword.html')
 
 def acousticguitar(request,data=None):
     if data == None:
