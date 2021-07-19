@@ -26,6 +26,9 @@ class ProductView(View):
 # def product_detail(request):
 #  return render(request, 'app/productdetail.html')
 
+
+
+
 class ProductDetailView(View):
     def get(self,request,pk):
         totalitem=0
@@ -47,6 +50,17 @@ def add_to_cart(request):
  Cart(user=user,product=product).save()
 
  return redirect('/cart')
+
+def searchproduct(request):
+    query = request.GET.get('search_query')
+    search_query = query[0].upper() + query[1:]
+    print(search_query)
+    all_product = Product.objects.all()
+    match_product=[]
+    for products in all_product:
+        if search_query in products.title or search_query in products.brand or search_query in products.category or search_query in products.description:
+            match_product.append(products)
+    return render (request,'app/searchresults.html',{'search_query':query,'match_product':match_product})
 
 @login_required
 def add_to_wishlist(request):
