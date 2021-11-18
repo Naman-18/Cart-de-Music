@@ -19,3 +19,9 @@
  font-size: 24px;
  font-weight: bold;
 }
+
+.product__reviews {
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    height: 64%;
+  }

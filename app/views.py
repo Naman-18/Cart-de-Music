@@ -3,13 +3,14 @@ from django.db.models.query import QuerySet
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
-from .models import Customer, Product, Cart, OrderPlaced, Wishlist
+from .models import Customer, Product, Cart, OrderPlaced, Wishlist, Reviews
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.http import HttpResponseRedirect
 
 class ProductView(View):
     def get(self,request):
@@ -33,13 +34,15 @@ class ProductDetailView(View):
     def get(self,request,pk):
         totalitem=0
         product = Product.objects.get(pk=pk)
+        reviews = Reviews.objects.filter(product= product)
         item_already_in_cart =False
+        
         if(request.user.is_authenticated):
             item_already_in_cart = Cart.objects.filter(Q(product=product.id)& Q(user=request.user)).exists()
             if request.user.is_authenticated:
              totalitem= len(Cart.objects.filter(user=request.user))
         return render(request, 'app/productdetail.html',
-            {'product':product,'item_already_in_cart':item_already_in_cart,'totalitem':totalitem})
+            {'product':product,'item_already_in_cart':item_already_in_cart,'totalitem':totalitem,'reviews':reviews})
 
 @login_required
 def add_to_cart(request):
@@ -53,14 +56,13 @@ def add_to_cart(request):
 
 def searchproduct(request):
     query = request.GET.get('search_query')
-    search_query = query[0].upper() + query[1:]
-    print(search_query)
-    all_product = Product.objects.all()
-    match_product=[]
-    for products in all_product:
-        if search_query in products.title or search_query in products.brand or search_query in products.category or search_query in products.description:
-            match_product.append(products)
-    return render (request,'app/searchresults.html',{'search_query':query,'match_product':match_product})
+    find_product = Product.objects.filter(
+        Q(title__icontains=query)|
+        Q(brand__icontains=query)|
+        Q(category__icontains=query)|
+        Q(description__icontains=query)
+    )
+    return render (request,'app/searchresults.html',{'search_query':query,'match_product':find_product})
 
 @login_required
 def add_to_wishlist(request):
@@ -84,7 +86,13 @@ def deletewishlist(request):
     wishid = request.GET.get('wishlistid')
     c =Wishlist.objects.get(Q(id=wishid) & Q(user=request.user))
     c.delete()
-    return redirect ('/wishlist')       
+    return redirect ('/wishlist')     
+
+def deletereview(request):
+    viewid = request.GET.get('reviewid')
+    c =Reviews.objects.get(Q(id=viewid) & Q(user=request.user))
+    c.delete()
+    return  redirect('/orders')
 
 
 @login_required
@@ -310,3 +318,4 @@ def payment_done(request):
         return redirect("orders")
     else:
         return render(request,'app/emptycart.html')
+

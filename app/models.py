@@ -69,6 +69,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=100)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     product_image = models.ImageField(upload_to='productimg',null = True)
+    rating = models.IntegerField(null = True)
     
     def __str__(self):
         return str(self.id)
@@ -112,3 +113,11 @@ class Wishlist(models.Model):
     date=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return str(self.id)   
+
+class Reviews(models.Model):
+    description = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)

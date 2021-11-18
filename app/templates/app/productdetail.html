@@ -24,7 +24,7 @@
  </form>
   <form action="/add_to_wishlist" class="d-inline">
    <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
-   <button type="submit" class="btn btn-danger shadow px-5 py-2">
+   <button type="submit" class="btn btn-warning shadow px-5 py-2">
   Wishlist </button>   
  </form>
  <form action="/buynow" class="d-inline">
@@ -33,6 +33,8 @@
   Buy Now </button>   
  </form>
  {%endif%}
+
+
  {%endif%}
 
  {% if not request.user.is_authenticated%}
@@ -66,4 +68,30 @@
   </div>
  </div>
 </div>
+
+<h4> &nbsp; Product Rating : {{product.rating}} <center> Reviews  <br><button text="center" type="submit" class="btn btn-secondary shadow px-5 py-2">
+       Add a Review </button> </center> </h4>
+<div class = "bg-dark d-grid gap-3 mx-auto">
+<br>
+<div class="col-sm-9 offset-sm-1  height: 100px; overflow-y: scroll;">
+  {% for review in reviews%}
+   <div class="row bg-light shadow-sm mb-3 rounded">
+    <div class="col-sm-9">
+      <p><strong> @{{review.user.username|capfirst}}</strong> &nbsp; &nbsp; -Posted {{review.created|timesince}} ago </p>
+      <p>  {{review.description}} </p>
+    </div>
+    <div class ="col-sm-2">
+    {% if request.user == review.user %}
+       <br>
+       <form action="/deletereview" class="d-inline">
+       <input type = "hidden" name="reviewid" value={{review.id}} id="reviewid">
+       <button text="center" type="submit" class="btn btn-danger shadow px-5 py-2">
+       Delete </button> </form>
+    {% endif %}
+    </div>
+    </div>   
+ {%endfor%}
+  </div>
+</div>
+
 {% endblock main-content %}

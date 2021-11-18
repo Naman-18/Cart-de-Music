@@ -8,7 +8,8 @@ from .models import(
     Product,
     Cart,
     OrderPlaced,
-    Wishlist
+    Wishlist,
+    Reviews
 )
 
 @admin.register(Customer)
@@ -17,7 +18,7 @@ class CustomerModelAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['id','title','selling_price','discounted_price','description','brand','category','product_image']
+    list_display = ['id','title','selling_price','discounted_price','description','brand','category','product_image','rating']
 
 @admin.register(Cart)
 class CartModelAdmin(admin.ModelAdmin):
@@ -38,3 +39,7 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     def product_info(self,obj):
         link = reverse("admin:app_product_change",args=[obj.product.pk])
         return format_html('<a href = "{}">{}</a>',link,obj.product.title)
+
+@admin.register(Reviews)
+class ReviewModelAdmin(admin.ModelAdmin):
+    list_display = ['id','description','updated','created','user','customer','product']
