@@ -119,5 +119,4 @@ class Reviews(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

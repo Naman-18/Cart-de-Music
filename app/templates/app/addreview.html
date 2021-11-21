@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Review{% endblock title %}
+{% block main-content %}
+<br>
+<div class="col-sm-9 offset-sm-1">
+<div class="row bg-warning shadow-sm mb-3 rounded">
+   <div class = "col-sm-2">
+   <a href="{% url 'product-detail' product.id %}" class="btn">
+   <img src = "{{product.product_image.url}}" alt="" srcset="" class="img-fluid rounded" height="150" width="150"> </a>
+   </div>
+    <div class="col-sm-7">
+    <p><strong> Product:</strong> {{product.title}} </p>
+    <p> <strong> Brand: </strong> {{product.brand}} </p>
+    <p> <strong> Price: </strong> Rs {{product.discounted_price}} </p>
+    <p> <strong> Rating: </strong> {{product.rating}} </p>
+    </div>
+</div>
+</div>
+<h1> <center> Add a Review </center> </h1>
+<div class="col-sm-8  offset-sm-1">
+   <form action="" method="post" novalidate class="d-inline">
+    {% csrf_token %}
+    {% for fm in form%}
+    <center>
+    <div class="form-group col-lg-6 mb-3">
+    {{fm}} <small class ="text-danger"> {{fm.errors|striptags}}</small>
+    </div>
+   
+    {%endfor%}
+
+    <div class = "col-12 mt-3">
+    <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id"> 
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <button type="submit" class="btn btn-danger mb-3">Submit </button>
+    </div>
+     </center>
+    </form>
+
+  </div>
+
+{% endblock main-content %}

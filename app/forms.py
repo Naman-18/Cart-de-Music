@@ -1,4 +1,4 @@
-from app.models import Customer
+from app.models import Customer,Reviews
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, PasswordResetForm, SetPasswordForm
@@ -44,3 +44,9 @@ class CustomerProfileForm(forms.ModelForm):
         'city':forms.TextInput(attrs={'class':'form-control'}),
         'state':forms.Select(attrs={'class':'form-control'}),
         'zipcode':forms.NumberInput(attrs={'class':'form-control'})}
+
+class CustomerReviewForm(forms.ModelForm):
+    class Meta:
+        model = Reviews
+        fields = ['description']
+        widgets = {'description':forms.Textarea(attrs={'rows':10, 'cols':100})}

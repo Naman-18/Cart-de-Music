@@ -42,4 +42,4 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
 
 @admin.register(Reviews)
 class ReviewModelAdmin(admin.ModelAdmin):
-    list_display = ['id','description','updated','created','user','customer','product']
+    list_display = ['id','description','updated','created','user','product']

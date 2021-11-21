@@ -4,7 +4,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from .models import Customer, Product, Cart, OrderPlaced, Wishlist, Reviews
-from .forms import CustomerRegistrationForm, CustomerProfileForm
+from .forms import CustomerRegistrationForm, CustomerProfileForm, CustomerReviewForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
@@ -103,6 +103,34 @@ def buynow(request):
     quantity=1
     Cart(user=user,product=product,quantity=quantity).save()
     return redirect('/checkout')
+
+@method_decorator(login_required,name='dispatch')
+class ReviewView(View):
+    def get(self,request):
+        product_id = request.GET.get('prod_id')
+        reviewproduct = Product.objects.get(id=product_id)
+        form = CustomerReviewForm()
+        return render(request,'app/addreview.html',{'product':reviewproduct,'form':form})
+    
+    def post(self,request):
+        form =CustomerReviewForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            product_id = request.GET.get('prod_id')
+            product = Product.objects.get(id=product_id)
+            description = form.cleaned_data['description']
+            reg = Reviews(user=user,description=description,product =product)
+            reg.save()
+            messages.success(request, 'Review Added Successfully')
+            totalitem=0
+            acoustic = Product.objects.filter(category = 'AG')
+            electric = Product.objects.filter(category = 'EG')
+            classical = Product.objects.filter(category = 'CG')
+            if request.user.is_authenticated:
+                totalitem= len(Cart.objects.filter(user=request.user))
+            return render(request, 'app/home.html',
+            {'acoustic':acoustic, 'electric' : electric, 'classical': classical,'totalitem':totalitem})
+            
 
  
 @login_required

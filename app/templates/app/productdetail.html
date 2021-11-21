@@ -69,8 +69,13 @@
  </div>
 </div>
 
-<h4> &nbsp; Product Rating : {{product.rating}} <center> Reviews  <br><button text="center" type="submit" class="btn btn-secondary shadow px-5 py-2">
+<h4> &nbsp; Product Rating : {{product.rating}} <center> Reviews  <br>
+<form action="/addreview" class="d-inline">
+   <input type = "hidden" name="prod_id" value={{product.id}} id="prod_id">
+   <button text="center" type="submit" class="btn btn-secondary shadow px-5 py-2">
        Add a Review </button> </center> </h4>
+ </form>
+
 <div class = "bg-dark d-grid gap-3 mx-auto">
 <br>
 <div class="col-sm-9 offset-sm-1  height: 100px; overflow-y: scroll;">
